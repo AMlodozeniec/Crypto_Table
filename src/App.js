@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './assets/styles/App.scss';
 import Nav from './Components/Nav';
 import Table from './Components/Table/Table';
 
