@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.scss';
 import Nav from './Components/Nav';
-import TableHeader from './Components/Table/TableHeader';
+import Table from './Components/Table/Table';
 
 function App() {
   return (
     <div>
       <Nav />
       <div className="App">
-        <TableHeader />
+        <Table />
       </div>
     </div>
   );

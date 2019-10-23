@@ -9,7 +9,8 @@ export default class TableHeader extends Component {
 			"Price",
 			"Market Cap",
 			"Volume (24h)",
-			"Change (24h)"]
+			"Change (24h)"
+		]
 	};
 
 	render() {
