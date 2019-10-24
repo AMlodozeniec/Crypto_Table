@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TableHeader from './TableHeader';
+import TableRow from './TableRow';
+import '../../assets/styles/Table/Table.scss'
 
 export default class Table extends Component {
 	state = {
@@ -42,9 +44,19 @@ export default class Table extends Component {
 	}
 
 	render() {
+		const renderedList = this.state.coins.map(coin => {
+			return (
+				<TableRow
+					key={coin.symbol}
+					coin={coin}
+				/>
+			);
+		});
+		// return<div>{ renderedList }</div>;
 		return (
 			<div>
 				<TableHeader />
+				{renderedList}
 			</div>
 		);
 	}
