@@ -8,18 +8,16 @@ export default class Table extends Component {
 	};
 
 	componentDidMount() {
-		this.getData();
+		this.setData();
 	}
 
-	async getData() {
+	async setData() {
 		try {
 			let allCoinData = await axios.get('https://api.coincap.io/v2/assets');
-			let allCoins = allCoinData.data.data;
-			let filteredData = this.filterData(allCoins);
+			let filteredData = this.filterData(allCoinData.data.data);
 			this.setState({
 				coins: filteredData
 			});
-			// console.log(this.state.coins);
 		} catch (err) {
 			console.log(err);
 		}
