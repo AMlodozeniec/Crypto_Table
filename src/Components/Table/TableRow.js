@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import numbro from 'numbro';
 import '../../assets/styles/Table/TableRow.scss'
 
 export default class TableRow extends Component {
@@ -23,18 +24,18 @@ export default class TableRow extends Component {
 				</div>
 
 				<div>
-					{this.props.coin.priceUsd}
+					{numbro(this.props.coin.priceUsd).formatCurrency({ mantissa: 2 })}
 				</div>
 				<div>
-					{this.props.coin.marketCap}
-				</div>
-
-				<div>
-					{this.props.coin.volumeUsd24Hr}
+					{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true, })}
 				</div>
 
 				<div>
-					{this.props.coin.changePercent24Hr}
+					{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true, })}
+				</div>
+
+				<div>
+					{this.props.coin.changePercent24Hr}%
 				</div>
 
 			</div>
