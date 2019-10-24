@@ -52,7 +52,6 @@ export default class Table extends Component {
 				/>
 			);
 		});
-		// return<div>{ renderedList }</div>;
 		return (
 			<div>
 				<TableHeader />

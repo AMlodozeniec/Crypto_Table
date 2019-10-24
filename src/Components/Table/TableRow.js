@@ -8,34 +8,33 @@ export default class TableRow extends Component {
 		return (
 			<div className="table-row-container">
 				<div>
-					1
+					<p>{this.props.coin.rank}</p>
 				</div>
 
 				<div className="table-row-name-col">
 					<img
 						src={logoUrl}
-						width="32"
-						height="32"
 						alt={this.props.coin.name} />
+
 					<div>
 						<p>{this.props.coin.name}</p>
-						<p>{this.props.coin.symbol}</p>
+						<p className="table-row-name-col--symbol">{this.props.coin.symbol}</p>
 					</div>
 				</div>
 
 				<div>
-					{numbro(this.props.coin.priceUsd).formatCurrency({ mantissa: 2 })}
+					<p>{numbro(this.props.coin.priceUsd).formatCurrency({ mantissa: 2 })}</p>
 				</div>
 				<div>
-					{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true, })}
-				</div>
-
-				<div>
-					{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true, })}
+					<p>{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true, })}</p>
 				</div>
 
 				<div>
-					{this.props.coin.changePercent24Hr}%
+					<p>{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true, })}</p>
+				</div>
+
+				<div>
+					<p>{this.props.coin.changePercent24Hr}%</p>
 				</div>
 
 			</div>

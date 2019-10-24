@@ -3,9 +3,26 @@
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 	justify-items: center;
 	align-items: center;
+	padding: 10px 0;
+	background: white;
+	border: 1px solid  lightgrey;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	  box-shadow: 0 5.5px 17px 0 rgba(21, 31, 42, 0.1);
+
 }
 
 .table-row-name-col {
 	display: flex;
 	justify-self: flex-start;
+	img {
+		width: 32px;
+		height: 32px;
+	}
+	div {
+		margin-left: 10px;
+	}
+	&--symbol {
+		font-size: .7rem;
+	}
 }
