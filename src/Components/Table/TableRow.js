@@ -15,7 +15,7 @@ export default class TableRow extends Component {
 						src={logoUrl}
 						width="32"
 						height="32"
-						alt="" />
+						alt={this.props.coin.name} />
 					<div>
 						<p>{this.props.coin.name}</p>
 						<p>{this.props.coin.symbol}</p>

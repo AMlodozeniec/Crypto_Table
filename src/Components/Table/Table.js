@@ -33,10 +33,10 @@ export default class Table extends Component {
 				rank: item.rank,
 				symbol: item.symbol,
 				name: item.name,
-				marketCap: item.marketCapUsd,
-				priceUsd: item.priceUsd,
-				volumeUsd24Hr: item.volumeUsd24Hr,
-				changePercent24Hr: item.changePercent24Hr
+				marketCap: parseFloat(item.marketCapUsd).toFixed(2),
+				priceUsd: parseFloat(item.priceUsd).toFixed(2),
+				volumeUsd24Hr: parseFloat(item.volumeUsd24Hr).toFixed(2),
+				changePercent24Hr: parseFloat(item.changePercent24Hr).toFixed(2)
 			};
 			coinArr.push(coin);
 		});
