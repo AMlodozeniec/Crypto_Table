@@ -102,7 +102,6 @@ export default class Table extends Component {
 		const renderedList = this.state.coins.map((coin) => {
 			return <TableRow key={coin.symbol} coin={coin} />;
 		});
-		// return<div>{ renderedList }</div>;
 		return (
 			<div>
 				<TableHeader handleSort={this.handleSort} />
