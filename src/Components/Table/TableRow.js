@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import numbro from 'numbro';
+import MainModal from '../Modal/MainModal';
 import '../../assets/styles/Table/TableRow.scss'
 
 export default class TableRow extends Component {
@@ -48,24 +49,37 @@ export default class TableRow extends Component {
 					<p>{this.props.coin.changePercent24Hr}%</p>
 				</div>
 
-				<Modal show={this.state.show} handleClose={this.hideModal}>
+				<MainModal
+					show={this.state.show}
+					handleClose={this.hideModal}
+					id={this.props.coin.id}
+					rank={this.props.coin.rank}
+					symbol={this.props.coin.symbol}
+					name={this.props.coin.name}
+					marketCap={this.props.coin.marketCap}
+					priceUsd={this.props.coin.priceUsd}
+					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
+					changePercent24Hr={this.props.coin.changePercent24Hr}
+					/>
+
+				{/* <Modal show={this.state.show} handleClose={this.hideModal} coin={this.props.coin}>
 					<p>Modal</p>
 					<p>Data</p>
-				</Modal>
+				</Modal> */}
 			</div >
 		)
 	}
 }
 
-const Modal = ({ handleClose, show, children }) => {
-	const showHideClassName = show ? "modal display-block" : "modal display-none";
+// const Modal = ({ show, handleClose }) => {
+// 	const showHideClassName = show ? "modal display-block" : "modal display-none";
 
-	return (
-		<div className={showHideClassName}>
-			<section className="modal-main">
-				{children}
-				<button onClick={handleClose}>close</button>
-			</section>
-		</div>
-	);
-};
+// 	return (
+// 		<div className={showHideClassName}>
+// 			<section className="modal-main">
+// 				{this.props.coin}
+// 				<button onClick={handleClose}>close</button>
+// 			</section>
+// 		</div>
+// 	);
+// };
