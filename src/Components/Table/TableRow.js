@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import numbro from 'numbro';
 import MainModal from '../Modal/MainModal';
-import '../../assets/styles/Table/TableRow.scss'
+import '../../assets/styles/Table/TableRow.scss';
 
 export default class TableRow extends Component {
 	state = { show: false };
@@ -11,12 +11,17 @@ export default class TableRow extends Component {
 	};
 
 	hideModal = (e) => {
-		e.stopPropagation()
+		e.stopPropagation();
 		this.setState({ show: false });
 	};
 
+	addDefaultSrc = (e) => {
+		e.target.src =
+			'https://icon-icons.com/icons2/1385/PNG/32/generic-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95340.png';
+	};
+
 	render() {
-		const logoUrl = `https://static.coincap.io/assets/icons/${this.props.coin.symbol.toLowerCase()}@2x.png`
+		const logoUrl = `https://static.coincap.io/assets/icons/${this.props.coin.symbol.toLowerCase()}@2x.png`;
 		return (
 			<div className="table-row-container" onClick={this.showModal}>
 				<div>
@@ -24,9 +29,7 @@ export default class TableRow extends Component {
 				</div>
 
 				<div className="table-row-name-col">
-					<img
-						src={logoUrl}
-						alt={this.props.coin.name} />
+					<img src={logoUrl} alt={this.props.coin.name} onError={this.addDefaultSrc} />
 
 					<div>
 						<p>{this.props.coin.name}</p>
@@ -38,11 +41,11 @@ export default class TableRow extends Component {
 					<p>{numbro(this.props.coin.priceUsd).formatCurrency({ mantissa: 2 })}</p>
 				</div>
 				<div>
-					<p>{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true, })}</p>
+					<p>{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true })}</p>
 				</div>
 
 				<div>
-					<p>{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true, })}</p>
+					<p>{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true })}</p>
 				</div>
 
 				<div>
@@ -60,14 +63,14 @@ export default class TableRow extends Component {
 					priceUsd={this.props.coin.priceUsd}
 					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
 					changePercent24Hr={this.props.coin.changePercent24Hr}
-					/>
+				/>
 
 				{/* <Modal show={this.state.show} handleClose={this.hideModal} coin={this.props.coin}>
 					<p>Modal</p>
 					<p>Data</p>
 				</Modal> */}
-			</div >
-		)
+			</div>
+		);
 	}
 }
 
