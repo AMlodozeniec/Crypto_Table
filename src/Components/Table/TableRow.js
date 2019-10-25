@@ -15,7 +15,7 @@ export default class TableRow extends Component {
 		this.setState({ show: false });
 	};
 
-	addDefaultSrc = (e) => {
+	logo404src = (e) => {
 		e.target.src =
 			'https://icon-icons.com/icons2/1385/PNG/32/generic-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95340.png';
 	};
@@ -29,7 +29,7 @@ export default class TableRow extends Component {
 				</div>
 
 				<div className="table-row-name-col">
-					<img src={logoUrl} alt={this.props.coin.name} onError={this.addDefaultSrc} />
+					<img src={logoUrl} alt={this.props.coin.name} onError={this.logo404src} />
 
 					<div>
 						<p>{this.props.coin.name}</p>
