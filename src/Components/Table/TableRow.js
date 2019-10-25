@@ -1,43 +1,23 @@
 import React, { Component } from 'react';
-import Modal from 'react-modal';
 import numbro from 'numbro';
 import '../../assets/styles/Table/TableRow.scss'
 
-const customStyles = {
-	content: {
-		top: '50%',
-		left: '50%',
-		right: 'auto',
-		bottom: 'auto',
-		marginRight: '-50%',
-		transform: 'translate(-50%, -50%)'
-	}
-};
-
-// Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement('#root')
 export default class TableRow extends Component {
-	state = {
-		modalIsOpen: false
+	state = { show: false };
+
+	showModal = () => {
+		this.setState({ show: true });
 	};
 
-	openModal() {
-		this.setState({ modalIsOpen: true });
-	}
-
-	closeModal(e) {
+	hideModal = (e) => {
 		e.stopPropagation()
-		this.setState({ modalIsOpen: false });
-	}
-
-	openModal = this.openModal.bind(this);
-	closeModal = this.closeModal.bind(this);
-
+		this.setState({ show: false });
+	};
 
 	render() {
 		const logoUrl = `https://static.coincap.io/assets/icons/${this.props.coin.symbol.toLowerCase()}@2x.png`
 		return (
-			<div className="table-row-container" onClick={this.openModal}>
+			<div className="table-row-container" onClick={this.showModal}>
 				<div>
 					<p>{this.props.coin.rank}</p>
 				</div>
@@ -68,16 +48,24 @@ export default class TableRow extends Component {
 					<p>{this.props.coin.changePercent24Hr}%</p>
 				</div>
 
-				<Modal
-					isOpen={this.state.modalIsOpen}
-					onAfterOpen={this.afterOpenModal}
-					onRequestClose={this.closeModal}
-					style={customStyles}
-				>
-					<button onClick={this.closeModal}>close</button>
-					<div>I am a modal</div>
+				<Modal show={this.state.show} handleClose={this.hideModal}>
+					<p>Modal</p>
+					<p>Data</p>
 				</Modal>
-			</div>
+			</div >
 		)
 	}
 }
+
+const Modal = ({ handleClose, show, children }) => {
+	const showHideClassName = show ? "modal display-block" : "modal display-none";
+
+	return (
+		<div className={showHideClassName}>
+			<section className="modal-main">
+				{children}
+				<button onClick={handleClose}>close</button>
+			</section>
+		</div>
+	);
+};
