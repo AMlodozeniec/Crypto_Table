@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import '../../assets/styles/Modal/MainModal.scss'
 
 export default class MainModal extends Component {
 
 	static propTypes = {
-		prop: PropTypes
+		name: PropTypes.string.isRequired
 	}
 
 	render() {
