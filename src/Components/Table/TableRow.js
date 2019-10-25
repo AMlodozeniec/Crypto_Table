@@ -60,26 +60,8 @@ export default class TableRow extends Component {
 					priceUsd={this.props.coin.priceUsd}
 					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
 					changePercent24Hr={this.props.coin.changePercent24Hr}
-					/>
-
-				{/* <Modal show={this.state.show} handleClose={this.hideModal} coin={this.props.coin}>
-					<p>Modal</p>
-					<p>Data</p>
-				</Modal> */}
+				/>
 			</div >
 		)
 	}
 }
-
-// const Modal = ({ show, handleClose }) => {
-// 	const showHideClassName = show ? "modal display-block" : "modal display-none";
-
-// 	return (
-// 		<div className={showHideClassName}>
-// 			<section className="modal-main">
-// 				{this.props.coin}
-// 				<button onClick={handleClose}>close</button>
-// 			</section>
-// 		</div>
-// 	);
-// };
