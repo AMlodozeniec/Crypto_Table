@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import numbro from 'numbro';
 import MainModal from '../Modal/MainModal';
+import PropTypes from 'prop-types';
 import '../../assets/styles/Table/TableRow.scss';
 
 export default class TableRow extends Component {
 	state = { show: false };
+
+	static propTypes = {
+		coin: PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			rank: PropTypes.string.isRequired,
+			symbol: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			marketCap: PropTypes.number.isRequired,
+			priceUsd: PropTypes.number.isRequired,
+			volumeUsd24Hr: PropTypes.number.isRequired,
+			changePercent24Hr: PropTypes.string.isRequired
+		})
+	};
 
 	showModal = () => {
 		this.setState({ show: true });
@@ -64,7 +78,7 @@ export default class TableRow extends Component {
 					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
 					changePercent24Hr={this.props.coin.changePercent24Hr}
 				/>
-			</div >
-		)
+			</div>
+		);
 	}
 }
