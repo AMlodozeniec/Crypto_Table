@@ -25,11 +25,10 @@ export default class TableRow extends Component {
 	};
 
 	hideModal = (e) => {
-		e.stopPropagation();
 		this.setState({ show: false });
 	};
 
-	logo404src = (e) => {
+	replaceBrokenIcon = (e) => {
 		e.target.src =
 			'https://icon-icons.com/icons2/1385/PNG/32/generic-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95340.png';
 	};
@@ -43,7 +42,7 @@ export default class TableRow extends Component {
 				</div>
 
 				<div className="table-row-name-col">
-					<img src={logoUrl} alt={this.props.coin.name} onError={this.logo404src} />
+					<img src={logoUrl} alt={this.props.coin.name} onError={this.replaceBrokenIcon} />
 
 					<div>
 						<p>{this.props.coin.name}</p>
@@ -69,14 +68,15 @@ export default class TableRow extends Component {
 				<MainModal
 					show={this.state.show}
 					handleClose={this.hideModal}
-					id={this.props.coin.id}
-					rank={this.props.coin.rank}
-					symbol={this.props.coin.symbol}
-					name={this.props.coin.name}
-					marketCap={this.props.coin.marketCap}
-					priceUsd={this.props.coin.priceUsd}
-					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
-					changePercent24Hr={this.props.coin.changePercent24Hr}
+					coin={this.props.coin}
+					// id={this.props.coin.id}
+					// rank={this.props.coin.rank}
+					// symbol={this.props.coin.symbol}
+					// name={this.props.coin.name}
+					// marketCap={this.props.coin.marketCap}
+					// priceUsd={this.props.coin.priceUsd}
+					// volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
+					// changePercent24Hr={this.props.coin.changePercent24Hr}
 				/>
 			</div>
 		);
