@@ -48,7 +48,8 @@ export default class Table extends Component {
         marketCap: parseFloat(item.marketCapUsd),
         priceUsd: parseFloat(item.priceUsd),
         volumeUsd24Hr: parseFloat(item.volumeUsd24Hr),
-        changePercent24Hr: parseFloat(item.changePercent24Hr).toFixed(2)
+        changePercent24Hr: parseFloat(item.changePercent24Hr).toFixed(2),
+        logoUrl: `https://static.coincap.io/assets/icons/${item.symbol.toLowerCase()}@2x.png`
       };
       coinArr.push(coin);
     });

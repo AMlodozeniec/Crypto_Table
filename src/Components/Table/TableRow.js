@@ -1,70 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import numbro from 'numbro';
 import MainModal from '../Modal/MainModal';
+import { logo404src } from '../../utils/imgUtils';
 import '../../assets/styles/Table/TableRow.scss';
 
-export default class TableRow extends Component {
-	state = { show: false };
+const TableRow = props => {
+  const [show, setModal] = useState(false);
 
-	showModal = () => {
-		this.setState({ show: true });
-	};
+  return (
+    <div className="table-row-container" onClick={() => setModal(!show)}>
+      <div>
+        <p>{props.coin.rank}</p>
+      </div>
 
-	hideModal = (e) => {
-		e.stopPropagation();
-		this.setState({ show: false });
-	};
+      <div className="table-row-name-col">
+        <img
+          src={props.coin.logoUrl}
+          alt={props.coin.name}
+          onError={logo404src}
+        />
 
-	logo404src = (e) => {
-		e.target.src =
-			'https://icon-icons.com/icons2/1385/PNG/32/generic-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment_95340.png';
-	};
+        <div>
+          <p>{props.coin.name}</p>
+          <p className="table-row-name-col--symbol">{props.coin.symbol}</p>
+        </div>
+      </div>
 
-	render() {
-		const logoUrl = `https://static.coincap.io/assets/icons/${this.props.coin.symbol.toLowerCase()}@2x.png`;
-		return (
-			<div className="table-row-container" onClick={this.showModal}>
-				<div>
-					<p>{this.props.coin.rank}</p>
-				</div>
+      <div>
+        <p>{numbro(props.coin.priceUsd).formatCurrency({ mantissa: 2 })}</p>
+      </div>
+      <div>
+        <p>
+          {numbro(props.coin.marketCap).formatCurrency({
+            mantissa: 2,
+            average: true
+          })}
+        </p>
+      </div>
 
-				<div className="table-row-name-col">
-					<img src={logoUrl} alt={this.props.coin.name} onError={this.logo404src} />
+      <div>
+        <p>
+          {numbro(props.coin.volumeUsd24Hr).formatCurrency({
+            mantissa: 2,
+            average: true
+          })}
+        </p>
+      </div>
 
-					<div>
-						<p>{this.props.coin.name}</p>
-						<p className="table-row-name-col--symbol">{this.props.coin.symbol}</p>
-					</div>
-				</div>
+      <div>
+        <p>{props.coin.changePercent24Hr}%</p>
+      </div>
 
-				<div>
-					<p>{numbro(this.props.coin.priceUsd).formatCurrency({ mantissa: 2 })}</p>
-				</div>
-				<div>
-					<p>{numbro(this.props.coin.marketCap).formatCurrency({ mantissa: 2, average: true })}</p>
-				</div>
-
-				<div>
-					<p>{numbro(this.props.coin.volumeUsd24Hr).formatCurrency({ mantissa: 2, average: true })}</p>
-				</div>
-
-				<div>
-					<p>{this.props.coin.changePercent24Hr}%</p>
-				</div>
-
-				<MainModal
-					show={this.state.show}
-					handleClose={this.hideModal}
-					id={this.props.coin.id}
-					rank={this.props.coin.rank}
-					symbol={this.props.coin.symbol}
-					name={this.props.coin.name}
-					marketCap={this.props.coin.marketCap}
-					priceUsd={this.props.coin.priceUsd}
-					volumeUsd24Hr={this.props.coin.volumeUsd24Hr}
-					changePercent24Hr={this.props.coin.changePercent24Hr}
-				/>
-			</div >
-		)
-	}
-}
+      <MainModal
+        show={show}
+        id={props.coin.id}
+        rank={props.coin.rank}
+        symbol={props.coin.symbol}
+        name={props.coin.name}
+        marketCap={props.coin.marketCap}
+        priceUsd={props.coin.priceUsd}
+        volumeUsd24Hr={props.coin.volumeUsd24Hr}
+        changePercent24Hr={props.coin.changePercent24Hr}
+      />
+    </div>
+  );
+};
+export default TableRow;
