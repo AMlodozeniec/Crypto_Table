@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../assets/styles/Table/TableHeader.scss';
 
 const TableHeader = props => {
   const renderedHeaders = props.headers.map(header => {
     return (
-      <div key={header} onClick={() => this.props.handleSort(header)}>
+      <div key={header} onClick={() => props.handleSort(header)}>
         {header}
       </div>
     );
