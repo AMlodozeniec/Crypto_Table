@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { CoinContext } from './CoinContext';
 
-
 export const SortContext = createContext();
 
 export const SortContextProvider = props => {
