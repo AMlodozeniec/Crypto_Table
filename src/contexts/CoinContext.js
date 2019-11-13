@@ -37,6 +37,7 @@ export const CoinContextProvider = props => {
     });
     return coinArr;
   };
+
   return (
     <CoinContext.Provider value={{ coins }}>
       {props.children}

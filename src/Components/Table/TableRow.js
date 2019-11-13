@@ -27,7 +27,9 @@ const TableRow = props => {
       </div>
 
       <div>
-        <p>{numbro(props.coin.priceUsd).formatCurrency({ mantissa: 2 })}</p>
+        <p>{props.coin.priceUsd >= 1 ?
+          numbro(props.coin.priceUsd).formatCurrency({ mantissa: 2 })
+          : numbro(props.coin.priceUsd).formatCurrency({ mantissa: 3 })}</p>
       </div>
       <div>
         <p>

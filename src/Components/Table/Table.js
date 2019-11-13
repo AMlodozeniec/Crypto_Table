@@ -1,104 +1,153 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import { CoinContext } from '../../contexts/CoinContext';
+import { SortContext } from '../../contexts/SortContext';
 
 import '../../assets/styles/Table/Table.scss';
 
-export default class Table extends Component {
-  state = {
-    headers: [
-      'Rank',
-      'Name',
-      'Price',
-      'Market Cap',
-      'Volume (24h)',
-      'Change (24h)'
-    ],
-    sortable: {
-      column: null,
-      direction: 'desc'
-    }
-  };
+const Table = props => {
+  const { sortedCoins } = useContext(SortContext);
+  const { coins } = useContext(CoinContext);
 
-  sortDataBasedOnHeaderTitle(headerTitle, aRow, bRow) {
-    if (headerTitle === 'Rank') {
-      return aRow.rank - bRow.rank;
-    } else if (headerTitle === 'Name') {
-      const nameA = aRow.name.toUpperCase();
-      const nameB = bRow.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    } else if (headerTitle === 'Price') {
-      return aRow.priceUsd - bRow.priceUsd;
-    } else if (headerTitle === 'Market Cap') {
-      return aRow.marketCap - bRow.marketCap;
-    } else if (headerTitle === 'Volume (24h)') {
-      return aRow.volumeUsd24Hr - bRow.volumeUsd24Hr;
-    } else if (headerTitle === 'Change (24h)') {
-      return aRow.changePercent24Hr - bRow.changePercent24Hr;
-    }
-  }
+  const coinMap = sortedCoins.length !== 0 ? sortedCoins : coins;
 
-  flipDirection(column, headerTitle, currDirection) {
-    if (column === null) return 'desc'; //If first time column is clicked, sort by descending
-    return column === headerTitle
-      ? currDirection === 'asc'
-        ? 'desc'
-        : 'asc'
-      : 'desc'; //If different column is clicked, reset direction to descending. Otherwise, flip direction
-  }
+  return (
 
-  handleSort = headerTitle => {
-    let column = this.state.sortable.column;
-    let currentDirection = this.state.sortable.direction;
-    currentDirection = this.flipDirection(
-      column,
-      headerTitle,
-      currentDirection
-    );
-    const sortedData = this.state.coins.sort((a, b) => {
-      //sorts in ascending order always
-      return this.sortDataBasedOnHeaderTitle(headerTitle, a, b);
-    });
+    <div>
+      <TableHeader
 
-    if (currentDirection === 'desc') {
-      sortedData.reverse();
-    }
-
-    this.setState({
-      coins: sortedData,
-      sortable: {
-        column: headerTitle,
-        direction: currentDirection
-      }
-    });
-  };
-
-  render() {
-    return (
-      <CoinContext.Consumer>
-        {context => {
-          const { coins } = context;
-          const renderedList = coins.map(coin => {
-            return <TableRow key={coin.symbol} coin={coin} />;
-          });
-          return (
-            <div>
-              <TableHeader
-                headers={this.state.headers}
-                handleSort={this.handleSort}
-              />
-              <div>{renderedList}</div>
-            </div>
-          );
-        }}
-      </CoinContext.Consumer>
-    );
-  }
+      />
+      <div>{coinMap.map(coin => {
+        return <TableRow key={coin.symbol} coin={coin} />;
+      })}
+      </div>
+    </div>
+  );
 }
+export default Table;
+
+// const Table = props => {
+//   const { headers, handleSort, sortedCoins } = useContext(SortContext);
+//   const { coins } = useContext(CoinContext);
+//   console.log(sortedCoins);
+
+
+//   // const renderedList = coins.map(coin => {
+//   //   return <TableRow key={coin.symbol} coin={coin} />;
+//   // });
+//   return (
+
+//     <div>
+//       <TableHeader
+
+//       />
+//       <div>
+//         {coins.map(coin => {
+//           return <TableRow key={coin.symbol} coin={coin} />;
+//         })}
+
+//       </div>
+//     </div>
+//   );
+// }
+
+
+// export default class Table extends Component {
+//   state = {
+//     headers: [
+//       'Rank',
+//       'Name',
+//       'Price',
+//       'Market Cap',
+//       'Volume (24h)',
+//       'Change (24h)'
+//     ],
+//     sortable: {
+//       column: null,
+//       direction: 'desc'
+//     }
+//   };
+
+//   sortDataBasedOnHeaderTitle(headerTitle, aRow, bRow) {
+//     if (headerTitle === 'Rank') {
+//       return aRow.rank - bRow.rank;
+//     } else if (headerTitle === 'Name') {
+//       const nameA = aRow.name.toUpperCase();
+//       const nameB = bRow.name.toUpperCase();
+//       if (nameA < nameB) {
+//         return -1;
+//       }
+//       if (nameA > nameB) {
+//         return 1;
+//       }
+//       return 0;
+//     } else if (headerTitle === 'Price') {
+//       return aRow.priceUsd - bRow.priceUsd;
+//     } else if (headerTitle === 'Market Cap') {
+//       return aRow.marketCap - bRow.marketCap;
+//     } else if (headerTitle === 'Volume (24h)') {
+//       return aRow.volumeUsd24Hr - bRow.volumeUsd24Hr;
+//     } else if (headerTitle === 'Change (24h)') {
+//       return aRow.changePercent24Hr - bRow.changePercent24Hr;
+//     }
+//   }
+
+//   flipDirection(column, headerTitle, currDirection) {
+//     if (column === null) return 'desc'; //If first time column is clicked, sort by descending
+//     return column === headerTitle
+//       ? currDirection === 'asc'
+//         ? 'desc'
+//         : 'asc'
+//       : 'desc'; //If different column is clicked, reset direction to descending. Otherwise, flip direction
+//   }
+
+//   handleSort = headerTitle => {
+//     let column = this.state.sortable.column;
+//     let currentDirection = this.state.sortable.direction;
+//     currentDirection = this.flipDirection(
+//       column,
+//       headerTitle,
+//       currentDirection
+//     );
+//     const sortedData = this.state.coins.sort((a, b) => {
+//       //sorts in ascending order always
+//       return this.sortDataBasedOnHeaderTitle(headerTitle, a, b);
+//     });
+
+//     if (currentDirection === 'desc') {
+//       sortedData.reverse();
+//     }
+
+//     this.setState({
+//       coins: sortedData,
+//       sortable: {
+//         column: headerTitle,
+//         direction: currentDirection
+//       }
+//     });
+//   };
+
+//   render() {
+//     // const { coins } = useContext(CoinContext);
+//     return (
+//       <CoinContext.Consumer>
+//         {context => {
+//           const { coins } = context;
+//           const renderedList = coins.map(coin => {
+//             return <TableRow key={coin.symbol} coin={coin} />;
+//           });
+//           return (
+//             <div>
+//               <TableHeader
+//                 headers={this.state.headers}
+//                 handleSort={this.handleSort}
+//               />
+//               <div>{renderedList}</div>
+//             </div>
+//           );
+//         }}
+//       </CoinContext.Consumer>
+//     );
+//   }
+// }
